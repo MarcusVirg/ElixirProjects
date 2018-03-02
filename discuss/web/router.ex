@@ -27,6 +27,13 @@ defmodule Discuss.Router do
     # resources helper will do all of this for us.
   end
 
+  scope "/auth", Discuss do
+    pipe_through :browser
+
+    get "/:provider", AuthController, :request # "/auth/github"
+    get "/:provider/callback", AuthController, :callback # "/auth/github/callback"
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", Discuss do
   #   pipe_through :api
